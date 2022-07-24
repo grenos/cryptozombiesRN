@@ -23,7 +23,7 @@ export const AppRouter = () => {
                     Platform.OS === 'android' ? undefined : <BlurView />,
             }}>
             <Tab.Screen
-                name="Home"
+                name="HomeStack"
                 component={HomeStack}
                 options={{
                     tabBarLabel: Constants.home,
@@ -37,7 +37,7 @@ export const AppRouter = () => {
                 }}
             />
             <Tab.Screen
-                name="Other"
+                name="OtherStack"
                 component={OtherStack}
                 options={{
                     tabBarLabel: Constants.other,

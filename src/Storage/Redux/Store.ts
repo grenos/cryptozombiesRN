@@ -5,12 +5,11 @@ const reducer = {
     moviesSlice: MoviesSlice.reducer,
 };
 
-const createDebugger = require('redux-flipper').default;
+// const createDebugger = require('redux-flipper').default;
 
 export const store = configureStore({
     reducer,
-    middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(createDebugger()),
+    middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production',
 });
 

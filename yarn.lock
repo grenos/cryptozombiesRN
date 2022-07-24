@@ -1376,7 +1376,7 @@
   resolved "https://registry.yarnpkg.com/@realm.io/common/-/common-0.1.4.tgz#d50ed1c91af1477695222ce04754a19a81336a54"
   integrity sha512-+nI/fOa/G9idiZ7h9DVz5NmnrvVNI3AM/I0eB7vL/PxDCF8vH3vew8ZrWOSr08GT2bDliy1wB6IYRqezQ1H/Iw==
 
-"@realm/react@^0.3.1":
+"@realm/react@0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@realm/react/-/react-0.3.2.tgz#2f9c8bce5646241aaea7e41eaf2dcbdb402d7c4e"
   integrity sha512-vCfe8oGa3Lyq4FdI3oT5Ge8Nsp7HyXMj+KAWE7peYZpBSrjusNh6zXN9/1ASRB8a1vHMlPdbAtHQM3vgXAqxoQ==
@@ -2816,11 +2816,6 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
-cycle@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
-  integrity sha512-TVF6svNzeQCOpjCqsy0/CSy8VgObG3wXusJ73xW2GbG5rGx7lC8zxDSURicsXI2UsGdi2L0QNRCi745/wUDvsA==
-
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -2842,7 +2837,7 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dayjs@^1.8.15, dayjs@^1.8.29:
+dayjs@^1.8.15:
   version "1.11.4"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.4.tgz#3b3c10ca378140d8917e06ebc13a4922af4f433e"
   integrity sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==
@@ -6560,11 +6555,6 @@ react-native-fast-image@^8.5.11:
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.5.11.tgz#e3dc969d0e4e8df026646bf18194465aa55cbc2b"
   integrity sha512-cNW4bIJg3nvKaheG8vGMfqCt5LMWX9MS5+wMudgKIHbGO51spRr4sgnlhVgwHLcZ5aeNOVJ8CPRxDIWKRq/0QA==
 
-react-native-flipper@^0.152.0:
-  version "0.152.0"
-  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.152.0.tgz#f61e69b086b0ac87d3e1677eaa3750ffde12d122"
-  integrity sha512-sbEHjDEUW/alhQ3Ov5f7FMKwcCvlWCUL9Q6mvoW4mSkSSG8h/Ppq5nO97lYJL1CfUq6e+jkDvp71Wb7YZ1ofDg==
-
 react-native-gesture-handler@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.5.0.tgz#61385583570ed0a45a9ed142425e35f8fe8274fb"
@@ -6717,10 +6707,10 @@ realm-network-transport@^0.7.2:
     abort-controller "^3.0.0"
     node-fetch "^2.6.0"
 
-realm@^10.19.5:
-  version "10.19.5"
-  resolved "https://registry.yarnpkg.com/realm/-/realm-10.19.5.tgz#1caeb4d20f2f9367f1d558f8f24732ed9749d2ca"
-  integrity sha512-JUJEgV7liaqt+xxY+H1PkeAcsHWAiFitUjmMV5i2BRxfvqyHG8Ey5cX3XBGBB7gWTKYmLZ/zIH+Yu0B3HUwhlA==
+realm@11.0.0-rc.1:
+  version "11.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/realm/-/realm-11.0.0-rc.1.tgz#714dcf317a70a6adf1e8aa620b31c702bc37b4b9"
+  integrity sha512-ZboRZbDNpsPquRKYcRS4qJNzgDOfoPMDplaix5MDN+X2vafrkoNFDLz24iWdX23iPH/qmJdlcQgOQGHcMJqrbQ==
   dependencies:
     "@realm.io/common" "^0.1.4"
     bindings "^1.5.0"
@@ -6752,14 +6742,6 @@ recast@^0.20.4:
     esprima "~4.0.0"
     source-map "~0.6.1"
     tslib "^2.0.1"
-
-redux-flipper@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/redux-flipper/-/redux-flipper-2.0.2.tgz#5deca22ef81e71253912fdf8a403f272db9ed27f"
-  integrity sha512-X6OD3+Ok8g0SunzrwS5OtbE735eBDxLz3uuK4fdJSwbAzskqOS3SWc+rKuOpqmLkt8pN+Szp7Nof9Etm75B1Rg==
-  dependencies:
-    cycle "^1.0.3"
-    dayjs "^1.8.29"
 
 redux-thunk@^2.4.1:
   version "2.4.1"
