@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import {
+    CustomIcon,
     CustomSafeArea,
     CustomStatusBar,
     CustomText,
@@ -9,6 +10,7 @@ import {
 import { TouchableOpacity } from 'react-native';
 import { useAppDispatch } from '~Storage/Redux';
 import { getTodo } from '~Storage/Redux/Actions';
+import { Constants } from '~Utils';
 
 export const HomeScreen = () => {
     const bottom = useBottomTabBarHeight();
@@ -25,7 +27,16 @@ export const HomeScreen = () => {
             <CustomStatusBar translucent />
             <CustomSafeArea />
 
-            <CustomText font="title">Step One</CustomText>
+            <CustomText margin={[0, 20, 20, 20]} font="title">
+                Step One
+            </CustomText>
+
+            <CustomIcon
+                size={32}
+                name={Constants.close}
+                pressable
+                action={() => console.log('Test')}
+            />
 
             <TouchableOpacity
                 onPress={() => setShow(true)}
