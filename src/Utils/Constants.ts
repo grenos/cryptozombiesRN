@@ -1,6 +1,6 @@
 export enum Constants {
     home = 'Home',
-    other = 'Other',
+    other = 'Apps',
     back = 'chevron-back',
     trash = 'trash-outline',
     close = 'close-outline',

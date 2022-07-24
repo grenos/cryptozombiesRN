@@ -1,17 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ITest } from '~Types';
-import { getMovies } from '../Actions';
+import { ITodo } from '~Types';
+import { getTodo } from '../Actions';
 
 export interface MoviesState {
-    movies: ITest[];
+    todo: ITodo | {};
     loading: boolean;
     currentRequestId?: string;
+    error: string;
+    isError: boolean;
 }
 
 const initialState: MoviesState = {
-    movies: [],
+    todo: {},
     loading: false,
     currentRequestId: undefined,
+    error: '',
+    isError: false,
 };
 
 export const MoviesSlice = createSlice({
@@ -20,14 +24,24 @@ export const MoviesSlice = createSlice({
     reducers: {},
 
     extraReducers: builder => {
-        builder.addCase(getMovies.pending, (state, action) => {
+        builder.addCase(getTodo.pending, (state, action) => {
             state.loading = true;
+            state.error = '';
+            state.isError = false;
             state.currentRequestId = action.meta.requestId;
         });
-        builder.addCase(getMovies.fulfilled, (state, action) => {
+        builder.addCase(getTodo.rejected, (state, action) => {
             state.loading = false;
             state.currentRequestId = undefined;
-            state.movies = action.payload;
+            state.error = action.payload as string;
+            state.isError = true;
+        });
+        builder.addCase(getTodo.fulfilled, (state, action) => {
+            state.loading = false;
+            state.currentRequestId = undefined;
+            state.error = '';
+            state.isError = false;
+            state.todo = action.payload;
         });
     },
 });

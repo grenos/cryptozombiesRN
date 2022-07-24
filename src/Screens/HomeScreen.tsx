@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import {
     CustomSafeArea,
@@ -7,11 +7,18 @@ import {
     CustomView,
 } from '~Components';
 import { TouchableOpacity } from 'react-native';
+import { useAppDispatch } from '~Storage/Redux';
+import { getTodo } from '~Storage/Redux/Actions';
 
 export const HomeScreen = () => {
     const bottom = useBottomTabBarHeight();
 
     const [show, setShow] = useState(false);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getTodo());
+    }, [dispatch, show]);
 
     return (
         <CustomView style={{ paddingBottom: bottom }}>
