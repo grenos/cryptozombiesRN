@@ -4,13 +4,18 @@ import { View, ViewProps } from 'react-native';
 import { useTheme } from '~Utils';
 
 type Props = {
-    w?: number;
-    pv?: number;
-    ph?: number;
-    mh?: number;
-    mv?: number;
-    bg?: string;
-    dir?: 'row' | 'column';
+    width?: number;
+    background?: string;
+    direction?: 'row' | 'column';
+    justify?:
+        | 'flex-start'
+        | 'flex-end'
+        | 'center'
+        | 'space-between'
+        | 'space-around';
+    align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
+    mg?: [number, number, number, number];
+    pd?: [number, number, number, number];
 } & ViewProps;
 
 export const CustomView = (props: Props) => {
@@ -21,13 +26,21 @@ export const CustomView = (props: Props) => {
         <View
             style={[
                 {
-                    backgroundColor: props.bg ? props.bg : theme.background,
-                    width: props.w ? `${props.w}%` : '100%',
-                    paddingVertical: props.pv ? props.pv : 0,
-                    paddingHorizontal: props.ph ? props.ph : 0,
-                    marginHorizontal: props.mh ? props.mh : 0,
-                    marginVertical: props.mv ? props.mv : 0,
-                    flexDirection: props.dir ? props.dir : 'column',
+                    flexDirection: props.direction ? props.direction : 'column',
+                    justifyContent: props.justify ? props.justify : 'center',
+                    alignItems: props.align ? props.align : 'center',
+                    backgroundColor: props.background
+                        ? props.background
+                        : theme.constants.transparent,
+                    width: props.width ? `${props.width}%` : undefined,
+                    marginTop: props.mg && props.mg[0],
+                    marginRight: props.mg && props.mg[1],
+                    marginBottom: props.mg && props.mg[2],
+                    marginLeft: props.mg && props.mg[3],
+                    paddingTop: props.pd && props.pd[0],
+                    paddingRight: props.pd && props.pd[1],
+                    paddingBottom: props.pd && props.pd[2],
+                    paddingLeft: props.pd && props.pd[3],
                 },
                 style,
             ]}

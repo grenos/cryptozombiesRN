@@ -42,11 +42,14 @@ export const HomeScreen = () => {
     }, [dispatch, show]);
 
     return (
-        <CustomView style={{ paddingBottom: bottom }}>
+        <CustomView
+            style={{ paddingBottom: bottom }}
+            background="pink"
+            mg={[10, 20, 10, 20]}>
             <CustomStatusBar translucent />
             <CustomSafeArea />
 
-            <CustomText margin={[0, 20, 20, 20]} font="title">
+            <CustomText mg={[0, 20, 20, 20]} font="title">
                 Step One
             </CustomText>
 

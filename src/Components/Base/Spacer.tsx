@@ -11,7 +11,7 @@ export const Spacer: FC<Props> = ({ height }) => {
     return (
         <CustomView
             style={{ height: height }}
-            bg={theme.constants.transparent}
+            background={theme.constants.transparent}
         />
     );
 };

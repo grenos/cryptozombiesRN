@@ -10,8 +10,8 @@ type Props = {
     align?: 'left' | 'center' | 'right';
     italic?: boolean;
     color?: string;
-    margin?: number[];
-    padding?: number[];
+    mg?: [number, number, number, number];
+    pd?: [number, number, number, number];
 } & TextProps;
 
 export const CustomText = (props: Props) => {
@@ -21,14 +21,14 @@ export const CustomText = (props: Props) => {
     return (
         <CustomView
             style={{
-                marginTop: props.margin && props.margin[0],
-                marginRight: props.margin && props.margin[1],
-                marginBottom: props.margin && props.margin[2],
-                marginLeft: props.margin && props.margin[3],
-                paddingTop: props.padding && props.padding[0],
-                paddingRight: props.padding && props.padding[1],
-                paddingBottom: props.padding && props.padding[2],
-                paddingLeft: props.padding && props.padding[3],
+                marginTop: props.mg && props.mg[0],
+                marginRight: props.mg && props.mg[1],
+                marginBottom: props.mg && props.mg[2],
+                marginLeft: props.mg && props.mg[3],
+                paddingTop: props.pd && props.pd[0],
+                paddingRight: props.pd && props.pd[1],
+                paddingBottom: props.pd && props.pd[2],
+                paddingLeft: props.pd && props.pd[3],
             }}>
             <Text
                 style={[
