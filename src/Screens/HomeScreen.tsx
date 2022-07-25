@@ -9,7 +9,8 @@ import {
 } from '~Components';
 import { TouchableOpacity } from 'react-native';
 import { useAppDispatch } from '~Storage/Redux';
-import { getTodo } from '~Storage/Redux/Actions';
+// import { createTodo, getTodo, getTodos } from '~Storage/Redux/Actions';
+// import { selectTodo, selectTodos } from '~Storage/Redux/Selectors';
 import { Constants } from '~Utils';
 
 export const HomeScreen = () => {
@@ -18,8 +19,26 @@ export const HomeScreen = () => {
     const [show, setShow] = useState(false);
     const dispatch = useAppDispatch();
 
+    // const todo = useAppSelector(selectTodo);
+    // const todos = useAppSelector(selectTodos);
+
+    // console.log('todo--------', todo);
+    // console.log('todos', todos);
+
     useEffect(() => {
-        dispatch(getTodo());
+        // dispatch(getTodo('todos/999'));
+        // dispatch(
+        //     createTodo({
+        //         endpoint: 'todos',
+        //         todo: {
+        //             completed: false,
+        //             id: 999,
+        //             title: 'delectus aut autem',
+        //             userId: 999,
+        //         },
+        //     }),
+        // );
+        // dispatch(getTodos('todos'));
     }, [dispatch, show]);
 
     return (

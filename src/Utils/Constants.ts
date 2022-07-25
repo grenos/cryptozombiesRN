@@ -5,3 +5,7 @@ export enum Constants {
     trash = 'trash-outline',
     close = 'close-outline',
 }
+
+export enum Api {
+    base = 'https://jsonplaceholder.typicode.com',
+}

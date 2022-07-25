@@ -1,7 +1,3 @@
-export interface ITest {
-    test: string;
-}
-
 export interface ITodo {
     userId: number;
     id: number;
