@@ -13,8 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7DB35AB2288D622C00BF3FC7 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DB35AA2288D622C00BF3FC7 /* Ionicons.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A4C7DCDC35131CF2E3E30B1D /* libPods-boilerapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4FA4C24B11223F15D5596F /* libPods-boilerapp.a */; };
-		DC74795A3BF2EE6A8C3FBEDD /* libPods-boilerapp-boilerappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3FE13DA26CBF355017A2D9 /* libPods-boilerapp-boilerappTests.a */; };
+		89C6300F0CFF415549AA4BE2 /* libPods-boilerapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7352C8D0CE0EBB2D5A86C5FC /* libPods-boilerapp.a */; };
+		9E58FCDDEC0B7F2D00862C1E /* libPods-boilerapp-boilerappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 406BE3D8FE123E35FA10F136 /* libPods-boilerapp-boilerappTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,14 +37,14 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = boilerapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = boilerapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = boilerapp/main.m; sourceTree = "<group>"; };
-		27D4005D640580430ECE7C8B /* Pods-boilerapp-boilerappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp-boilerappTests.release.xcconfig"; path = "Target Support Files/Pods-boilerapp-boilerappTests/Pods-boilerapp-boilerappTests.release.xcconfig"; sourceTree = "<group>"; };
-		2B4FA4C24B11223F15D5596F /* libPods-boilerapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boilerapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E3FE13DA26CBF355017A2D9 /* libPods-boilerapp-boilerappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boilerapp-boilerappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		600E55E90C8650577D470455 /* Pods-boilerapp-boilerappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp-boilerappTests.debug.xcconfig"; path = "Target Support Files/Pods-boilerapp-boilerappTests/Pods-boilerapp-boilerappTests.debug.xcconfig"; sourceTree = "<group>"; };
+		406BE3D8FE123E35FA10F136 /* libPods-boilerapp-boilerappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boilerapp-boilerappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B22D0938A1ED49F2DADFAB3 /* Pods-boilerapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp.debug.xcconfig"; path = "Target Support Files/Pods-boilerapp/Pods-boilerapp.debug.xcconfig"; sourceTree = "<group>"; };
+		674D52C6D62D4572334B94DE /* Pods-boilerapp-boilerappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp-boilerappTests.debug.xcconfig"; path = "Target Support Files/Pods-boilerapp-boilerappTests/Pods-boilerapp-boilerappTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6B7C8EEC7FC369C40B1CC941 /* Pods-boilerapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp.release.xcconfig"; path = "Target Support Files/Pods-boilerapp/Pods-boilerapp.release.xcconfig"; sourceTree = "<group>"; };
+		7352C8D0CE0EBB2D5A86C5FC /* libPods-boilerapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boilerapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F9AB6A72596DC84A802450 /* Pods-boilerapp-boilerappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp-boilerappTests.release.xcconfig"; path = "Target Support Files/Pods-boilerapp-boilerappTests/Pods-boilerapp-boilerappTests.release.xcconfig"; sourceTree = "<group>"; };
 		7DB35AA2288D622C00BF3FC7 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = boilerapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9C4A01AD8BF0757030EBD47E /* Pods-boilerapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp.release.xcconfig"; path = "Target Support Files/Pods-boilerapp/Pods-boilerapp.release.xcconfig"; sourceTree = "<group>"; };
-		DABEC437D20E3680A277833E /* Pods-boilerapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerapp.debug.xcconfig"; path = "Target Support Files/Pods-boilerapp/Pods-boilerapp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC74795A3BF2EE6A8C3FBEDD /* libPods-boilerapp-boilerappTests.a in Frameworks */,
+				9E58FCDDEC0B7F2D00862C1E /* libPods-boilerapp-boilerappTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4C7DCDC35131CF2E3E30B1D /* libPods-boilerapp.a in Frameworks */,
+				89C6300F0CFF415549AA4BE2 /* libPods-boilerapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				2B4FA4C24B11223F15D5596F /* libPods-boilerapp.a */,
-				3E3FE13DA26CBF355017A2D9 /* libPods-boilerapp-boilerappTests.a */,
+				7352C8D0CE0EBB2D5A86C5FC /* libPods-boilerapp.a */,
+				406BE3D8FE123E35FA10F136 /* libPods-boilerapp-boilerappTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,10 +152,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DABEC437D20E3680A277833E /* Pods-boilerapp.debug.xcconfig */,
-				9C4A01AD8BF0757030EBD47E /* Pods-boilerapp.release.xcconfig */,
-				600E55E90C8650577D470455 /* Pods-boilerapp-boilerappTests.debug.xcconfig */,
-				27D4005D640580430ECE7C8B /* Pods-boilerapp-boilerappTests.release.xcconfig */,
+				4B22D0938A1ED49F2DADFAB3 /* Pods-boilerapp.debug.xcconfig */,
+				6B7C8EEC7FC369C40B1CC941 /* Pods-boilerapp.release.xcconfig */,
+				674D52C6D62D4572334B94DE /* Pods-boilerapp-boilerappTests.debug.xcconfig */,
+				77F9AB6A72596DC84A802450 /* Pods-boilerapp-boilerappTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -167,12 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "boilerappTests" */;
 			buildPhases = (
-				91F3BDC42644A2CDA1855026 /* [CP] Check Pods Manifest.lock */,
+				B1C74AD8CD6C6C2376091CA6 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				1ED00718B74DE9329DC68758 /* [CP] Embed Pods Frameworks */,
-				22F090B8D904339A10E29C66 /* [CP] Copy Pods Resources */,
+				703CB304BFC6439BF631FC69 /* [CP] Embed Pods Frameworks */,
+				9443DDA76E1A6A0117547C54 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -188,14 +188,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "boilerapp" */;
 			buildPhases = (
-				FB6E3CC6814F2BFD7F0BB951 /* [CP] Check Pods Manifest.lock */,
+				CD8D18BD3B5BED1133B11C19 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1284DFA68C267970BBCCA588 /* [CP] Embed Pods Frameworks */,
-				F4A28A60DF06169FF8ED323E /* [CP] Copy Pods Resources */,
+				53CD35499765F8275DC747DB /* [CP] Embed Pods Frameworks */,
+				F8FF50F8AAE2C8A5D27982A6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,7 +279,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		1284DFA68C267970BBCCA588 /* [CP] Embed Pods Frameworks */ = {
+		53CD35499765F8275DC747DB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -296,7 +296,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1ED00718B74DE9329DC68758 /* [CP] Embed Pods Frameworks */ = {
+		703CB304BFC6439BF631FC69 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -313,7 +313,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerapp-boilerappTests/Pods-boilerapp-boilerappTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		22F090B8D904339A10E29C66 /* [CP] Copy Pods Resources */ = {
+		9443DDA76E1A6A0117547C54 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -330,7 +330,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerapp-boilerappTests/Pods-boilerapp-boilerappTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		91F3BDC42644A2CDA1855026 /* [CP] Check Pods Manifest.lock */ = {
+		B1C74AD8CD6C6C2376091CA6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -352,24 +352,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F4A28A60DF06169FF8ED323E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FB6E3CC6814F2BFD7F0BB951 /* [CP] Check Pods Manifest.lock */ = {
+		CD8D18BD3B5BED1133B11C19 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -389,6 +372,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8FF50F8AAE2C8A5D27982A6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerapp/Pods-boilerapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -443,7 +443,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 600E55E90C8650577D470455 /* Pods-boilerapp-boilerappTests.debug.xcconfig */;
+			baseConfigurationReference = 674D52C6D62D4572334B94DE /* Pods-boilerapp-boilerappTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -470,7 +470,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27D4005D640580430ECE7C8B /* Pods-boilerapp-boilerappTests.release.xcconfig */;
+			baseConfigurationReference = 77F9AB6A72596DC84A802450 /* Pods-boilerapp-boilerappTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -494,7 +494,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DABEC437D20E3680A277833E /* Pods-boilerapp.debug.xcconfig */;
+			baseConfigurationReference = 4B22D0938A1ED49F2DADFAB3 /* Pods-boilerapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -520,7 +520,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C4A01AD8BF0757030EBD47E /* Pods-boilerapp.release.xcconfig */;
+			baseConfigurationReference = 6B7C8EEC7FC369C40B1CC941 /* Pods-boilerapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

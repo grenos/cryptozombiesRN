@@ -12,6 +12,7 @@
             "~Components/*": ["./src/Components/*"],
             "~Api/*": ["./src/Api/*"],
             "~Types/*": ["./src/Types/*"]
-        }
+        },
+        "esModuleInterop": true
     }
 }

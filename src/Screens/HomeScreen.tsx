@@ -12,11 +12,14 @@ import { useAppDispatch } from '~Storage/Redux';
 // import { createTodo, getTodo, getTodos } from '~Storage/Redux/Actions';
 // import { selectTodo, selectTodos } from '~Storage/Redux/Selectors';
 import { Constants } from '~Utils';
+import { ethers } from 'ethers';
+import { ethersProvider } from '../../index';
 
 export const HomeScreen = () => {
     const bottom = useBottomTabBarHeight();
 
     const [show, setShow] = useState(false);
+    const [address, setAddress] = useState('');
     const dispatch = useAppDispatch();
 
     // const todo = useAppSelector(selectTodo);
@@ -41,6 +44,24 @@ export const HomeScreen = () => {
         // dispatch(getTodos('todos'));
     }, [dispatch, show]);
 
+    const createWallet = () => {
+        const wallet = ethers.Wallet.createRandom();
+        console.log('mnemonic', wallet.mnemonic);
+        console.log('mnemonic', wallet.address);
+        setAddress(wallet.address);
+    };
+
+    const getFunds = async () => {
+        const balance = await ethersProvider.getBalance(
+            '0xC9CF5E3B476Cdc95340c4a1b6696B5c1FAe3059A',
+        );
+
+        console.log(
+            'balance in ETH',
+            ethers.utils.formatEther(ethers.BigNumber.from(balance)),
+        );
+    };
+
     return (
         <CustomView
             style={{ paddingBottom: bottom }}
@@ -61,9 +82,16 @@ export const HomeScreen = () => {
             />
 
             <TouchableOpacity
-                onPress={() => setShow(true)}
+                onPress={() => {
+                    setShow(true);
+                    createWallet();
+                }}
                 testID="toucheMeButton">
                 <CustomText font="body"> Touch me!</CustomText>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={getFunds} testID="toucheMeButton">
+                <CustomText font="body"> GET FUNDS</CustomText>
             </TouchableOpacity>
 
             {show && <CustomText font="body">IM HERE</CustomText>}
