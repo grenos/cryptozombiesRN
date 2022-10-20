@@ -14,19 +14,45 @@ import { useAppDispatch } from '~Storage/Redux';
 import { Constants } from '~Utils';
 import { ethers } from 'ethers';
 import { ethersProvider } from '../../index';
+import { realmContext, RMovie } from '~Storage/Realm';
+const { useQuery, useRealm, useObject } = realmContext;
+import { TestContract } from '~Web3';
+import { CONTRACT_ADDRESS, MNEMONIC } from '@env';
 
 export const HomeScreen = () => {
     const bottom = useBottomTabBarHeight();
 
     const [show, setShow] = useState(false);
-    const [address, setAddress] = useState('');
+    const [, setAddress] = useState('');
     const dispatch = useAppDispatch();
+
+    // [START] - REALM
+    const realm = useRealm();
+
+    // get all by model
+    const movies = useQuery<RMovie>('RMovie');
+    console.log('all movies: ', movies);
+
+    // Gget by object id
+    const movie = useObject<RMovie>('RMovie', '1');
+    console.log('movie: ', movie);
+
+    const realmWrite = () => {
+        const obj = { id: '3', title: 'a Movie' };
+        realm.write(() => {
+            realm.create(RMovie.name, obj);
+        });
+    };
+
+    const realmDelete = () => {
+        realm.write(() => {
+            realm.delete(realm.objectForPrimaryKey(RMovie.name, '2'));
+        });
+    };
+    // [END] - REALM
 
     // const todo = useAppSelector(selectTodo);
     // const todos = useAppSelector(selectTodos);
-
-    // console.log('todo--------', todo);
-    // console.log('todos', todos);
 
     useEffect(() => {
         // dispatch(getTodo('todos/999'));
@@ -47,20 +73,52 @@ export const HomeScreen = () => {
     const createWallet = () => {
         const wallet = ethers.Wallet.createRandom();
         console.log('mnemonic', wallet.mnemonic);
-        console.log('mnemonic', wallet.address);
+        console.log('address', wallet.address);
         setAddress(wallet.address);
     };
 
     const getFunds = async () => {
-        const balance = await ethersProvider.getBalance(
-            '0xC9CF5E3B476Cdc95340c4a1b6696B5c1FAe3059A',
+        const balance1 = await ethersProvider.getBalance(
+            '0x6e79183e94B92D59f52B96CDb2BB8DD638C2E537',
+        );
+
+        const balance2 = await ethersProvider.getBalance(
+            '0x3fc325406635161A4544380E63AF86c9B6669292',
         );
 
         console.log(
-            'balance in ETH',
-            ethers.utils.formatEther(ethers.BigNumber.from(balance)),
+            'balance in ETH for : 0x6e79183e94B92D59f52B96CDb2BB8DD638C2E537',
+            ethers.utils.formatEther(ethers.BigNumber.from(balance1)),
+        );
+
+        console.log(
+            'balance in ETH for : 0x3fc325406635161A4544380E63AF86c9B6669292',
+            ethers.utils.formatEther(ethers.BigNumber.from(balance2)),
         );
     };
+
+    useEffect(() => {
+        const init = async () => {
+            const wallet = ethers.Wallet.fromMnemonic(MNEMONIC);
+            const connectedWallet = wallet.connect(ethersProvider);
+            const contract = new ethers.Contract(
+                CONTRACT_ADDRESS,
+                TestContract.abi,
+                connectedWallet,
+            );
+            console.log(contract);
+            const response = await contract.getValue();
+            console.log(response.toString());
+            const resp1 = await contract.setValue(5);
+            console.log(resp1);
+
+            contract.once('ValueChange', value => {
+                console.log('VALUE HAS CHAMGED TO : ' + value);
+            });
+        };
+
+        // init();
+    }, []);
 
     return (
         <CustomView
@@ -90,9 +148,23 @@ export const HomeScreen = () => {
                 <CustomText font="body"> Touch me!</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={getFunds} testID="toucheMeButton">
-                <CustomText font="body"> GET FUNDS</CustomText>
-            </TouchableOpacity>
+            <CustomView mg={[30, 0, 0, 0]}>
+                <TouchableOpacity onPress={getFunds} testID="toucheMeButton">
+                    <CustomText font="body"> GET FUNDS</CustomText>
+                </TouchableOpacity>
+            </CustomView>
+
+            <CustomView mg={[30, 0, 0, 0]}>
+                <TouchableOpacity onPress={realmWrite} testID="toucheMeButton">
+                    <CustomText font="body"> WRITE TO REALM</CustomText>
+                </TouchableOpacity>
+            </CustomView>
+
+            <CustomView mg={[30, 0, 0, 0]}>
+                <TouchableOpacity onPress={realmDelete} testID="toucheMeButton">
+                    <CustomText font="body"> DELETE A REALM</CustomText>
+                </TouchableOpacity>
+            </CustomView>
 
             {show && <CustomText font="body">IM HERE</CustomText>}
         </CustomView>

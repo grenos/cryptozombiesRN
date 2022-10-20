@@ -11,8 +11,10 @@
             "~Utils/*": ["./src/Utils/*"],
             "~Components/*": ["./src/Components/*"],
             "~Api/*": ["./src/Api/*"],
-            "~Types/*": ["./src/Types/*"]
+            "~Types/*": ["./src/Types/*"],
+            "~Web3/*": ["./src/Web3/*"]
         },
         "esModuleInterop": true
-    }
+    },
+    "typeRoots": ["./types"]
 }
