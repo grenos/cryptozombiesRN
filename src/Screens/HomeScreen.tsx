@@ -7,15 +7,13 @@ import {
     CustomView,
     Loader,
 } from '~Components';
-import { realmContext, RWallet } from '~Storage/Realm';
-const { useQuery } = realmContext;
 import { ethersProvider } from '../../index';
 import { ethers } from 'ethers';
 
 export const HomeScreen = () => {
-    const [wallet] = useQuery<RWallet>('RWallet');
-
     const [funds, setFunds] = useState('');
+    const [address, setAddress] = useState('');
+    const [seed, setSeed] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const createWallet = useCallback(async () => {
@@ -28,6 +26,8 @@ export const HomeScreen = () => {
                 connectedWallet.address,
             );
             setFunds(ethers.utils.formatEther(ethers.BigNumber.from(balance)));
+            setAddress(connectedWallet.address);
+            setSeed(connectedWallet.mnemonic.phrase);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -42,7 +42,7 @@ export const HomeScreen = () => {
 
             <CustomText font="title">My Wallet</CustomText>
 
-            {!wallet?.address && (
+            {!address && (
                 <TouchableOpacity
                     onPress={() => {
                         setIsLoading(true);
@@ -63,14 +63,14 @@ export const HomeScreen = () => {
                     <CustomText font="body" bold>
                         My Address
                     </CustomText>
-                    <CustomText font="body">{wallet?.address}</CustomText>
+                    <CustomText font="body">{address}</CustomText>
                 </CustomView>
 
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
                     <CustomText font="body" bold>
                         My Seed phrase
                     </CustomText>
-                    <CustomText font="body">{wallet?.seed}</CustomText>
+                    <CustomText font="body">{seed}</CustomText>
                 </CustomView>
 
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
