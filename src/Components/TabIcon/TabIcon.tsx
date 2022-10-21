@@ -14,7 +14,7 @@ export const TabIcon: FC<Props> = ({ focused, size, title }) => {
         <Icon
             name={
                 focused
-                    ? `${title.toLocaleLowerCase()}-sharp`
+                    ? title.toLocaleLowerCase()
                     : `${title.toLocaleLowerCase()}-outline`
             }
             size={size}

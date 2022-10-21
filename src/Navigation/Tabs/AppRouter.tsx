@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeStack, OtherStack } from '~Navigation/Stacks';
+import { CreateZombiesStack, HomeStack, OtherStack } from '~Navigation/Stacks';
 import { TabIcon, BlurView } from '~Components';
 import { Constants, useTheme } from '~Utils';
 
@@ -32,6 +32,20 @@ export const AppRouter = () => {
                             focused={focused}
                             size={size}
                             title={Constants.home}
+                        />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="CreateZombiesStack"
+                component={CreateZombiesStack}
+                options={{
+                    tabBarLabel: Constants.create,
+                    tabBarIcon: ({ focused, size }) => (
+                        <TabIcon
+                            focused={focused}
+                            size={size}
+                            title={Constants.create}
                         />
                     ),
                 }}

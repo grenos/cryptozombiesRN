@@ -41,6 +41,7 @@ export const HomeScreen = () => {
             <CustomSafeArea />
 
             <CustomText font="title">My Wallet</CustomText>
+            <CustomText font="caption">Sepolia</CustomText>
 
             {!address && (
                 <TouchableOpacity
