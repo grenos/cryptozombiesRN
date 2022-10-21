@@ -13,12 +13,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useColorScheme, useTheme } from '~Utils';
 const { RealmProvider } = realmContext;
 import { ethers } from 'ethers';
-import { INNFURA_API_KEY } from '@env';
 
-export const ethersProvider = new ethers.providers.InfuraProvider(
-    'sepolia',
-    INNFURA_API_KEY,
-);
+export const ethersProvider = new ethers.providers.InfuraProvider('sepolia');
 
 LogBox.ignoreLogs(['The native module for Flipper', 'ViewPropTypes']);
 

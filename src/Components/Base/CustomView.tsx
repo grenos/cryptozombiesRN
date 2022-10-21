@@ -18,6 +18,7 @@ type Props = {
     mg?: [number, number, number, number];
     pd?: [number, number, number, number];
     container?: boolean;
+    flex?: boolean;
 } & ViewProps;
 
 export const CustomView = (props: Props) => {
@@ -45,7 +46,7 @@ export const CustomView = (props: Props) => {
         <View
             style={[
                 {
-                    flex: props.container ? 1 : 0,
+                    flex: props.flex ? 1 : 0,
                     flexDirection: props.direction ? props.direction : 'column',
                     justifyContent: props.justify ? props.justify : 'center',
                     alignItems: props.align ? props.align : 'center',

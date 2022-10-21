@@ -7,64 +7,42 @@ import {
     CustomView,
     Loader,
 } from '~Components';
-import { realmContext, RMovie } from '~Storage/Realm';
-const { useQuery, useRealm, useObject } = realmContext;
-import { ethers } from 'ethers';
+import { realmContext, RWallet } from '~Storage/Realm';
+const { useQuery } = realmContext;
 import { ethersProvider } from '../../index';
+import { ethers } from 'ethers';
 
 export const HomeScreen = () => {
-    // [START] - REALM
-    const realm = useRealm();
+    const [wallet] = useQuery<RWallet>('RWallet');
 
-    // get all by model
-    const movies = useQuery<RMovie>('RMovie');
-    console.log('all movies: ', movies);
-
-    // Gget by object id
-    const movie = useObject<RMovie>('RMovie', '1');
-    console.log('movie: ', movie);
-
-    const realmWrite = () => {
-        const obj = { id: '3', title: 'a Movie' };
-        realm.write(() => {
-            realm.create(RMovie.name, obj);
-        });
-    };
-
-    const realmDelete = () => {
-        realm.write(() => {
-            realm.delete(realm.objectForPrimaryKey(RMovie.name, '2'));
-        });
-    };
-    // [END] - REALM
-
-    const [address, setAddress] = useState('');
-    const [mnemonic, setMnemmonic] = useState('');
     const [funds, setFunds] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const createWallet = useCallback(async () => {
-        const wallet = ethers.Wallet.fromMnemonic(
-            'rely spot column badge lunch forest question about ketchup produce misery angry',
-        );
-        const connectedWallet = wallet.connect(ethersProvider);
-        setAddress(connectedWallet.address);
-        setMnemmonic(connectedWallet.mnemonic.phrase);
-        const balance = await ethersProvider.getBalance(
-            connectedWallet.address,
-        );
-        setFunds(ethers.utils.formatEther(ethers.BigNumber.from(balance)));
-        setIsLoading(false);
+        try {
+            const _wallet = ethers.Wallet.fromMnemonic(
+                'rely spot column badge lunch forest question about ketchup produce misery angry',
+            );
+            const connectedWallet = _wallet.connect(ethersProvider);
+            const balance = await ethersProvider.getBalance(
+                connectedWallet.address,
+            );
+            setFunds(ethers.utils.formatEther(ethers.BigNumber.from(balance)));
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
     }, []);
 
     return (
-        <CustomView container justify="flex-start">
+        <CustomView container flex justify="flex-start">
             <CustomStatusBar />
             <CustomSafeArea />
 
             <CustomText font="title">My Wallet</CustomText>
 
-            {!address && (
+            {!wallet?.address && (
                 <TouchableOpacity
                     onPress={() => {
                         setIsLoading(true);
@@ -85,14 +63,14 @@ export const HomeScreen = () => {
                     <CustomText font="body" bold>
                         My Address
                     </CustomText>
-                    <CustomText font="body">{address}</CustomText>
+                    <CustomText font="body">{wallet?.address}</CustomText>
                 </CustomView>
 
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
                     <CustomText font="body" bold>
                         My Seed phrase
                     </CustomText>
-                    <CustomText font="body">{mnemonic}</CustomText>
+                    <CustomText font="body">{wallet?.seed}</CustomText>
                 </CustomView>
 
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>

@@ -1,22 +1,25 @@
 import { Realm } from '@realm/react';
 
-export class RMovie extends Realm.Object<RMovie> {
+export class RWallet extends Realm.Object<RWallet> {
     id!: string;
-    title!: string;
+    address!: string;
+    seed!: string;
 
     static generate() {
         return {
             id: '',
-            title: '',
+            address: '',
+            seed: '',
         };
     }
 
     static schema = {
-        name: 'RMovie',
+        name: 'RWallet',
         primaryKey: 'id',
         properties: {
             id: 'string',
-            title: 'string',
+            address: 'string',
+            seed: 'string',
         },
     };
 }
