@@ -15,6 +15,15 @@ const { RealmProvider } = realmContext;
 import { ethers } from 'ethers';
 
 export const ethersProvider = new ethers.providers.InfuraProvider('sepolia');
+export class WalletGlobal {
+    constructor(_wallet) {
+        if (WalletGlobal._instance) {
+            return WalletGlobal._instance;
+        }
+        WalletGlobal._instance = this;
+        this.wallet = _wallet;
+    }
+}
 
 LogBox.ignoreLogs(['The native module for Flipper', 'ViewPropTypes']);
 

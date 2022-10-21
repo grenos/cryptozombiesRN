@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import {
@@ -7,7 +8,7 @@ import {
     CustomView,
     Loader,
 } from '~Components';
-import { ethersProvider } from '../../index';
+import { ethersProvider, WalletGlobal } from '../../index';
 import { ethers } from 'ethers';
 
 export const HomeScreen = () => {
@@ -22,6 +23,7 @@ export const HomeScreen = () => {
                 'rely spot column badge lunch forest question about ketchup produce misery angry',
             );
             const connectedWallet = _wallet.connect(ethersProvider);
+            const _ = new WalletGlobal(connectedWallet);
             const balance = await ethersProvider.getBalance(
                 connectedWallet.address,
             );

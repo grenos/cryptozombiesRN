@@ -7,14 +7,20 @@ import {
     CustomView,
     Loader,
 } from '~Components';
+import { ethersProvider, WalletGlobal } from '../../index';
+import { ethers, Wallet } from 'ethers';
 
 export const CreateZombieScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [zombieName, onChangeText] = useState('');
 
-    const createZombie = useCallback(() => {
-        console.log(zombieName);
-        setIsLoading(false);
+    const createZombie = useCallback(async () => {
+        const _wallet: Wallet = new WalletGlobal().wallet;
+        console.log(_wallet);
+
+        // console.log(zombieName);
+        // setIsLoading(false);
+
         // const contract = new ethers.Contract(
         //     CONTRACT_ADDRESS,
         //     TestContract.abi,
@@ -74,7 +80,7 @@ const s = StyleSheet.create({
         marginTop: 20,
         width: 200,
         paddingHorizontal: 40,
-        paddingVertical: 20,
+        paddingVertical: 10,
         borderRadius: 6,
     },
     input: {
