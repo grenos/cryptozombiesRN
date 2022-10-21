@@ -10,7 +10,7 @@ contract ZombieHelper is ZombieFeeding {
   using SafeMath32 for uint32;
 
   modifier aboveLevel(uint _level, uint _zombieId) {
-    require(zombies[_zombieId].level >= _level);
+    require(zombies[_zombieId].level >= _level, "You're not above the required level");
     _;
   }
 
@@ -24,7 +24,7 @@ contract ZombieHelper is ZombieFeeding {
   }
 
   function levelUp(uint _zombieId) external payable {
-    require(msg.value == levelUpFee);
+    require(msg.value == levelUpFee, "You haven't paid enough to upgrade");
     zombies[_zombieId].level = zombies[_zombieId].level.add(1);
   }
 

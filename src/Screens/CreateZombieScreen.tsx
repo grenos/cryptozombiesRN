@@ -9,31 +9,30 @@ import {
 } from '~Components';
 import { ethersProvider, WalletGlobal } from '../../index';
 import { ethers, Wallet } from 'ethers';
+import { ZombieFactory } from '~Web3/Abi/ZombieFactory';
 
 export const CreateZombieScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [zombieName, onChangeText] = useState('');
 
     const createZombie = useCallback(async () => {
-        const _wallet: Wallet = new WalletGlobal().wallet;
-        console.log(_wallet);
+        try {
+            setIsLoading(true);
+            const _wallet: Wallet = new WalletGlobal().wallet;
+            const contract = new ethers.Contract(
+                '0x0bb282B9204A21aD544fAE160C7207A97A173A3A',
+                ZombieFactory,
+                _wallet,
+            );
+            await contract.createRandomZombie(zombieName);
+            setIsLoading(false);
 
-        // console.log(zombieName);
-        // setIsLoading(false);
-
-        // const contract = new ethers.Contract(
-        //     CONTRACT_ADDRESS,
-        //     TestContract.abi,
-        //     connectedWallet,
-        // );
-        // console.log(contract);
-        // const response = await contract.getValue();
-        // console.log(response.toString());
-        // const resp1 = await contract.setValue(5);
-        // console.log(resp1);
-        // contract.once('ValueChange', value => {
-        //     console.log('VALUE HAS CHAMGED TO : ' + value);
-        // });
+            contract.once('NewZombie', (zombieId, name, dan) => {
+                console.log({ zombieId, name, dan });
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }, [zombieName]);
 
     return (
