@@ -2,41 +2,69 @@ import { StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import {
     CustomSafeArea,
+    CustomScrollView,
     CustomStatusBar,
     CustomText,
     CustomView,
     Loader,
 } from '~Components';
-import { ethersProvider, WalletGlobal } from '../../index';
-import { ethers, Wallet } from 'ethers';
-import { ZombieFactory } from '~Web3/Abi/ZombieFactory';
+import { ZombieContract } from '~Web3';
 
 export const CreateZombieScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [zombieName, onChangeText] = useState('');
+    const [zombieName, onChangeTextZombie] = useState('');
+    const [kittyName, onChangeTextKitty] = useState('');
+    const [_zombieId, onChangeTextZombieId] = useState('');
+    const [isMintingZombie, setIsMintingZombie] = useState(false);
+    const [isEatingKitty, setisEatingKitty] = useState(false);
 
     const createZombie = useCallback(async () => {
         try {
             setIsLoading(true);
-            const _wallet: Wallet = new WalletGlobal().wallet;
-            const contract = new ethers.Contract(
-                '0x0bb282B9204A21aD544fAE160C7207A97A173A3A',
-                ZombieFactory,
-                _wallet,
-            );
-            await contract.createRandomZombie(zombieName);
+            setIsMintingZombie(true);
+            await ZombieContract.createRandomZombie(zombieName);
             setIsLoading(false);
 
-            contract.once('NewZombie', (zombieId, name, dan) => {
-                console.log({ zombieId, name, dan });
+            ZombieContract.once('NewZombie', (zombieId, name, dna) => {
+                setIsMintingZombie(false);
+                console.log({
+                    zombieId: zombieId.toString(),
+                    name,
+                    dna: dna.toString(),
+                });
             });
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
+            setIsMintingZombie(false);
         }
     }, [zombieName]);
 
+    const eatTheKitty = useCallback(async () => {
+        try {
+            setIsLoading(true);
+            setisEatingKitty(true);
+            let zombieIdToNumber = +_zombieId;
+            await ZombieContract.feedOnKitty(zombieIdToNumber, kittyName);
+            setIsLoading(false);
+
+            ZombieContract.once('NewZombie', (zombieId, name, dna) => {
+                setisEatingKitty(false);
+                console.log({
+                    zombieId: zombieId.toString(),
+                    name,
+                    dna: dna.toString(),
+                });
+            });
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+            setisEatingKitty(false);
+        }
+    }, [kittyName, _zombieId]);
+
     return (
-        <CustomView container flex justify="flex-start">
+        <CustomScrollView flexGrow>
             <CustomStatusBar />
             <CustomSafeArea />
 
@@ -46,14 +74,55 @@ export const CreateZombieScreen = () => {
                 <CustomText font="body">Name your Zombie</CustomText>
                 <TextInput
                     style={s.input}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeTextZombie}
                     value={zombieName}
+                    placeholder="Insert Zombie name"
                 />
                 <TouchableOpacity onPress={createZombie} style={s.button2}>
                     <CustomText font="body" color="white">
                         Create Zombie
                     </CustomText>
                 </TouchableOpacity>
+
+                {isMintingZombie && (
+                    <CustomText font="caption" color="red">
+                        Your Zombie is being minted
+                    </CustomText>
+                )}
+            </CustomView>
+
+            <CustomView mg={[40, 0, 0, 0]}>
+                <CustomText font="body">Feed on a CryptoKitty</CustomText>
+
+                <CustomView orientation="row">
+                    <TextInput
+                        style={[s.input, s.inputRow]}
+                        onChangeText={onChangeTextZombieId}
+                        value={_zombieId}
+                        placeholder="Insert zombie id"
+                        keyboardType="number-pad"
+                    />
+                    <TextInput
+                        style={[s.input, s.inputRow]}
+                        onChangeText={onChangeTextKitty}
+                        value={kittyName}
+                        placeholder="Insert Kitty name"
+                    />
+                </CustomView>
+
+                <TouchableOpacity
+                    onPress={eatTheKitty}
+                    style={[s.button2, s.pinkBG]}>
+                    <CustomText font="body" color="white">
+                        Eat the Kitty
+                    </CustomText>
+                </TouchableOpacity>
+
+                {isEatingKitty && (
+                    <CustomText font="caption" color="red">
+                        Your Zombie is eating a Kitty
+                    </CustomText>
+                )}
             </CustomView>
 
             {isLoading && (
@@ -69,7 +138,7 @@ export const CreateZombieScreen = () => {
                     </CustomView>
                 </Loader>
             )}
-        </CustomView>
+        </CustomScrollView>
     );
 };
 
@@ -88,4 +157,6 @@ const s = StyleSheet.create({
         width: 200,
         padding: 10,
     },
+    pinkBG: { backgroundColor: '#ff83d3' },
+    inputRow: { width: '40%', marginHorizontal: 10 },
 });

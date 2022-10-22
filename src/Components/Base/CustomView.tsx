@@ -7,7 +7,7 @@ import { useTheme } from '~Utils';
 type Props = {
     width?: number;
     background?: string;
-    direction?: 'row' | 'column';
+    orientation?: 'row' | 'column';
     justify?:
         | 'flex-start'
         | 'flex-end'
@@ -47,7 +47,9 @@ export const CustomView = (props: Props) => {
             style={[
                 {
                     flex: props.flex ? 1 : 0,
-                    flexDirection: props.direction ? props.direction : 'column',
+                    flexDirection: props.orientation
+                        ? props.orientation
+                        : 'column',
                     justifyContent: props.justify ? props.justify : 'center',
                     alignItems: props.align ? props.align : 'center',
                     backgroundColor: props.background

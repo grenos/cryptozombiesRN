@@ -41,7 +41,7 @@ contract ZombieFeeding is ZombieFactory {
       return (_zombie.readyTime <= block.timestamp);
   }
 
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal onlyOwnerOf(_zombieId) {
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _kittyName, string memory _species) internal onlyOwnerOf(_zombieId) {
     Zombie storage myZombie = zombies[_zombieId];
     require(_isReady(myZombie), "Zombie is still in cooldown period");
     _targetDna = _targetDna % dnaModulus;
@@ -50,14 +50,21 @@ contract ZombieFeeding is ZombieFactory {
     if (keccak256(abi.encodePacked(_species)) == keccak256(abi.encodePacked("kitty"))) {
       newDna = newDna - newDna % 100 + 99;
     }
-    _createZombie("NoName", newDna);
+    _createZombie(_kittyName, newDna);
     _triggerCooldown(myZombie);
   }
 
-  function feedOnKitty(uint _zombieId, uint _kittyId) public {
-    uint kittyDna;
+  function feedOnKitty(uint _zombieId, string memory _kittyName) public {
+    // fake cryptokitty dna creation function
+    uint kittyDna = _makeFakeKittyDna(_kittyName);
     // this is how we deconstruct a tuple so we can get only the values that we're interested in.
-    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-    feedAndMultiply(_zombieId, kittyDna, "kitty");
+    // (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+    feedAndMultiply(_zombieId, kittyDna, _kittyName, "kitty");
+  }
+
+  function _makeFakeKittyDna(string memory _str) private pure returns (uint) {
+    uint rand = uint(keccak256(abi.encodePacked(_str)));
+    uint _dnaModulus = 10 ** 72;
+    return rand % _dnaModulus;
   }
 }
