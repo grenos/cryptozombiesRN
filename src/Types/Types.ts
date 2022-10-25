@@ -8,3 +8,13 @@ export interface ITodo {
 export interface IApiResponse<T> {
     data?: T;
 }
+
+export type Zombie = {
+    name: string;
+    dna: number;
+    level: number;
+    readyTime: number;
+    winCount: number;
+    lossCount: number;
+    index?: number;
+};

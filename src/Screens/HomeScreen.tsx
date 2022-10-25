@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import {
     CustomSafeArea,
@@ -10,12 +10,14 @@ import {
 } from '~Components';
 import { ethersProvider, WalletGlobal } from '../../index';
 import { ethers } from 'ethers';
+import { ZombieContract } from '~Web3';
 
 export const HomeScreen = () => {
     const [funds, setFunds] = useState('');
     const [address, setAddress] = useState('');
     const [seed, setSeed] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [_balanceOf, setBalanceOf] = useState(0);
 
     const createWallet = useCallback(async () => {
         try {
@@ -36,6 +38,15 @@ export const HomeScreen = () => {
             setIsLoading(false);
         }
     }, []);
+
+    const balanceOf = useCallback(async (_address: string) => {
+        const numberOfZombies = await ZombieContract.balanceOf(_address);
+        setBalanceOf(numberOfZombies.toString());
+    }, []);
+
+    useEffect(() => {
+        address && balanceOf(address);
+    }, [address, balanceOf]);
 
     return (
         <CustomView container flex justify="flex-start">
@@ -81,6 +92,13 @@ export const HomeScreen = () => {
                         My Eth
                     </CustomText>
                     <CustomText font="body">{funds}</CustomText>
+                </CustomView>
+
+                <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
+                    <CustomText font="body" bold>
+                        Number of Zombies
+                    </CustomText>
+                    <CustomText font="body">{_balanceOf}</CustomText>
                 </CustomView>
             </CustomView>
 
