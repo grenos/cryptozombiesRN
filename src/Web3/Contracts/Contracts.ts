@@ -5,7 +5,7 @@ import { WalletGlobal } from '../../../index';
 export const Wallet: EthersWallet = new WalletGlobal().wallet;
 
 export const ZombieContract = new ethers.Contract(
-    ZombieAbi.networks['11155111'].address,
+    ZombieAbi.networks['5'].address,
     ZombieAbi.abi,
     Wallet,
 );

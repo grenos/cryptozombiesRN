@@ -14,7 +14,7 @@ import { useColorScheme, useTheme } from '~Utils';
 const { RealmProvider } = realmContext;
 import { ethers } from 'ethers';
 
-export const ethersProvider = new ethers.providers.InfuraProvider('sepolia');
+export const ethersProvider = new ethers.providers.InfuraProvider('goerli');
 export class WalletGlobal {
     constructor(_wallet) {
         if (WalletGlobal._instance) {

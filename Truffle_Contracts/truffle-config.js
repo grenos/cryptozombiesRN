@@ -22,6 +22,16 @@ module.exports = {
             confirmations: 1,
             timeoutBlocks: 200,
         },
+        goerli: {
+            provider: () =>
+                new HDWalletProvider(
+                    MNEMONIC,
+                    `https://goerli.infura.io/v3/${INNFURA_API_KEY}`,
+                ),
+            network_id: 5,
+            confirmations: 1,
+            timeoutBlocks: 200,
+        },
     },
 
     mocha: {},
