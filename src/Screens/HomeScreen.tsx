@@ -10,10 +10,11 @@ import {
 } from '~Components';
 import { ethersProvider, WalletGlobal } from '../../index';
 import { ethers } from 'ethers';
-import { ZombieContract } from '~Web3';
+import { ChainLinkToken, ZombieContract } from '~Web3';
 
 export const HomeScreen = () => {
     const [funds, setFunds] = useState('');
+    const [fundsLink, setFundsLink] = useState('');
     const [address, setAddress] = useState('');
     const [seed, setSeed] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +31,11 @@ export const HomeScreen = () => {
                 connectedWallet.address,
             );
             setFunds(ethers.utils.formatEther(ethers.BigNumber.from(balance)));
+
+            const link = await ChainLinkToken.balanceOf(
+                connectedWallet.address,
+            );
+            setFundsLink(ethers.utils.formatEther(ethers.BigNumber.from(link)));
             setAddress(connectedWallet.address);
             setSeed(connectedWallet.mnemonic.phrase);
             setIsLoading(false);
@@ -92,6 +98,13 @@ export const HomeScreen = () => {
                         My Eth
                     </CustomText>
                     <CustomText font="body">{funds}</CustomText>
+                </CustomView>
+
+                <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
+                    <CustomText font="body" bold>
+                        My Link
+                    </CustomText>
+                    <CustomText font="body">{fundsLink}</CustomText>
                 </CustomView>
 
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
