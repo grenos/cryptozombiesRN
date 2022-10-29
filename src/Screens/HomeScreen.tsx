@@ -9,50 +9,166 @@ import {
     Loader,
 } from '~Components';
 import { ethersProvider, WalletGlobal } from '../../index';
-import { ethers } from 'ethers';
+import { ethers, Wallet } from 'ethers';
 import { ChainLinkToken, ZombieContract } from '~Web3';
+import { useIsFocused } from '@react-navigation/native';
 
 export const HomeScreen = () => {
+    const focus = useIsFocused();
     const [funds, setFunds] = useState('');
     const [fundsLink, setFundsLink] = useState('');
+    const [contractLinkBalance, setContractLinkBalance] = useState('');
     const [address, setAddress] = useState('');
     const [seed, setSeed] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [firstTime, setFirstTime] = useState(true);
     const [_balanceOf, setBalanceOf] = useState(0);
+    const [MyWallet, setMyWallet] = useState<Wallet | null>(null);
+
+    useEffect(() => {
+        const init = async () => {
+            if (MyWallet && !firstTime) {
+                console.log('enters');
+
+                try {
+                    const balance = await ethersProvider.getBalance(
+                        MyWallet.address,
+                    );
+                    setFunds(
+                        ethers.utils.formatEther(
+                            ethers.BigNumber.from(balance),
+                        ),
+                    );
+
+                    const link = await ChainLinkToken.balanceOf(
+                        MyWallet.address,
+                    );
+                    setFundsLink(
+                        ethers.utils.formatEther(ethers.BigNumber.from(link)),
+                    );
+
+                    const contractBalance = await ChainLinkToken.balanceOf(
+                        ZombieContract.address,
+                    );
+
+                    setContractLinkBalance(
+                        ethers.utils.formatEther(
+                            ethers.BigNumber.from(contractBalance),
+                        ),
+                    );
+
+                    const numberOfZombies = await ZombieContract.balanceOf(
+                        MyWallet.address,
+                    );
+                    setBalanceOf(numberOfZombies.toString());
+                } catch (error) {
+                    console.log(error, 'FOCUS');
+                }
+            }
+        };
+
+        init();
+    }, [MyWallet, firstTime, focus]);
 
     const createWallet = useCallback(async () => {
         try {
             const _wallet = ethers.Wallet.fromMnemonic(
                 'rely spot column badge lunch forest question about ketchup produce misery angry',
             );
+            setMyWallet(_wallet);
             const connectedWallet = _wallet.connect(ethersProvider);
             const _ = new WalletGlobal(connectedWallet);
             const balance = await ethersProvider.getBalance(
                 connectedWallet.address,
             );
             setFunds(ethers.utils.formatEther(ethers.BigNumber.from(balance)));
+            setAddress(connectedWallet.address);
 
-            const link = await ChainLinkToken.balanceOf(
+            const numberOfZombies = await ZombieContract.balanceOf(
                 connectedWallet.address,
             );
-            setFundsLink(ethers.utils.formatEther(ethers.BigNumber.from(link)));
-            setAddress(connectedWallet.address);
+            setBalanceOf(numberOfZombies.toString());
+
             setSeed(connectedWallet.mnemonic.phrase);
-            setIsLoading(false);
+            await setupChainlink(connectedWallet);
+            setFirstTime(false);
         } catch (error) {
             console.log(error);
             setIsLoading(false);
         }
     }, []);
 
-    const balanceOf = useCallback(async (_address: string) => {
-        const numberOfZombies = await ZombieContract.balanceOf(_address);
-        setBalanceOf(numberOfZombies.toString());
-    }, []);
+    const setupChainlink = async (connectedWallet: Wallet) => {
+        try {
+            const _ChainLinkContract = ChainLinkToken.connect(connectedWallet);
+            const link = await _ChainLinkContract.balanceOf(
+                connectedWallet.address,
+            );
+            setFundsLink(ethers.utils.formatEther(ethers.BigNumber.from(link)));
+            let parsedLink = parseInt(
+                ethers.utils.formatEther(ethers.BigNumber.from(link)),
+                10,
+            );
 
-    useEffect(() => {
-        address && balanceOf(address);
-    }, [address, balanceOf]);
+            if (parsedLink > 6) {
+                console.log('USER PAYED LINK TO CONTRACT');
+
+                await _ChainLinkContract.transfer(
+                    ZombieContract.address,
+                    ethers.utils.parseUnits('6'),
+                );
+
+                const filterFrom = _ChainLinkContract.filters.Transfer(
+                    connectedWallet.address,
+                );
+
+                _ChainLinkContract.on(
+                    filterFrom,
+                    async (from, to, amount, event) => {
+                        // The `from` will always be the signer address
+                        const contractBalance =
+                            await _ChainLinkContract.balanceOf(
+                                ZombieContract.address,
+                            );
+
+                        const _link = await _ChainLinkContract.balanceOf(
+                            connectedWallet.address,
+                        );
+                        setFundsLink(
+                            ethers.utils.formatEther(
+                                ethers.BigNumber.from(_link),
+                            ),
+                        );
+
+                        setContractLinkBalance(
+                            ethers.utils.formatEther(
+                                ethers.BigNumber.from(contractBalance),
+                            ),
+                        );
+                    },
+                );
+            } else {
+                console.log('USER DOESNT HAVE ANY LINK');
+                const contractBalance = await _ChainLinkContract.balanceOf(
+                    ZombieContract.address,
+                );
+                setFundsLink(
+                    ethers.utils.formatEther(ethers.BigNumber.from(link)),
+                );
+
+                setContractLinkBalance(
+                    ethers.utils.formatEther(
+                        ethers.BigNumber.from(contractBalance),
+                    ),
+                );
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
+    };
 
     return (
         <CustomView container flex justify="flex-start">
@@ -105,6 +221,13 @@ export const HomeScreen = () => {
                         My Link
                     </CustomText>
                     <CustomText font="body">{fundsLink}</CustomText>
+                </CustomView>
+
+                <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
+                    <CustomText font="body" bold>
+                        Amount of Link in Zombie Contract
+                    </CustomText>
+                    <CustomText font="body">{contractLinkBalance}</CustomText>
                 </CustomView>
 
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>

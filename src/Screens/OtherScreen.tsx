@@ -118,12 +118,20 @@ const ZombieRow: FC<Props> = ({ zombie, action }) => {
                     <CustomText font="body" mg={[2, 2, 0, 0]}>
                         Level: {zombie.level}
                     </CustomText>
-                    <CustomText font="caption" mg={[2, 2, 0, 0]}>
+                    <CustomText
+                        font="caption"
+                        numberOfLines={1}
+                        mg={[2, 2, 0, 0]}
+                        pd={[0, 10, 0, 0]}>
                         DNA: {zombie.dna.toString()}
                     </CustomText>
                 </CustomView>
 
-                <CustomIcon size={32} name={Constants.rightArrow} />
+                <CustomIcon
+                    size={32}
+                    name={Constants.rightArrow}
+                    style={{ marginLeft: -20 }}
+                />
             </CustomView>
         </TouchableOpacity>
     );

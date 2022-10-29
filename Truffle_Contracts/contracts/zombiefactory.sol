@@ -5,8 +5,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./SafeMath32.sol";
 import "./SafeMath16.sol";
+import "./VRFv2DirectFundingConsumer.sol";
 
-contract ZombieFactory is Ownable {
+contract ZombieFactory is VRFv2DirectFundingConsumer, Ownable {
 
   // importing multiple instances of the same library for different types
   using SafeMath for uint256;
@@ -18,8 +19,7 @@ contract ZombieFactory is Ownable {
   uint dnaDigits = 16;
   // the two stars mean "in the power of" so in this case it would be 10^16
   uint dnaModulus = 10 ** dnaDigits;
-  // uint cooldownTime = 1 days;
-  uint cooldownTime = 0;
+  uint cooldownTime = 5 minutes;
   
 
   struct Zombie {
@@ -42,11 +42,12 @@ contract ZombieFactory is Ownable {
 
   // internal keyword -> this function is only callable from this contract or for any other contract that inherits from this contract.
   function _createZombie(string memory _name, uint _dna) internal {
-    zombies.push(Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime), 0, 0));
+    uint _newDna = _dna % dnaModulus;
+    zombies.push(Zombie(_name, _newDna, 1, uint32(block.timestamp + cooldownTime), 0, 0));
     uint id = zombies.length - 1;
     zombieToOwner[id] = msg.sender;
     ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].add(1);
-    emit NewZombie(id, _name, _dna);
+    emit NewZombie(id, _name, _newDna);
   }
 
   // private keyword -> this function is only callable from this contract
@@ -60,9 +61,8 @@ contract ZombieFactory is Ownable {
 
   function createRandomZombie(string memory _name) public {
     // require(ownerZombieCount[msg.sender] == 0, "You already have created a zombie");
-    uint randDna = _generateRandomDna(_name);
-    randDna = randDna - randDna % 100;
+    // uint randDna = _generateRandomDna(_name);
+    uint randDna = _requestRandomWords();
     _createZombie(_name, randDna);
   }
-
 }
