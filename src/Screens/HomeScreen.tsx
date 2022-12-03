@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import {
     CustomSafeArea,
     CustomStatusBar,
@@ -9,12 +9,18 @@ import {
     Loader,
 } from '~Components';
 import { ethersProvider, WalletGlobal } from '../../index';
-import { ethers, Wallet } from 'ethers';
-import { ChainLinkToken, ZombieContract } from '~Web3';
+import { BigNumber, ethers, Wallet } from 'ethers';
+import { ChainLinkToken, getTokenBalance, ZombieContract } from '~Web3';
 import { useIsFocused } from '@react-navigation/native';
 
 import { NativeModules, NativeEventEmitter } from 'react-native';
+import { useTokens } from '~Utils/Hooks/useTokens';
 const { Tokens } = NativeModules;
+import { realmContext, RToken } from '~Storage/Realm';
+const { useRealm, useQuery, useObject } = realmContext;
+import { Tokens as JSONTokens } from '~Web3';
+import { Token } from '~Types';
+import { ERC20 } from '~Web3/Abi';
 
 export const HomeScreen = () => {
     const focus = useIsFocused();
@@ -27,6 +33,14 @@ export const HomeScreen = () => {
     const [firstTime, setFirstTime] = useState(true);
     const [_balanceOf, setBalanceOf] = useState(0);
     const [MyWallet, setMyWallet] = useState<Wallet | null>(null);
+
+    // useTokens('0x4b58C57db696D2E043a72149507d5267f7dD74fe');
+    const realm = useRealm();
+    const Realmtokens = useQuery('RToken');
+    // console.log(Realmtokens);
+    useMemo(() => console.log('memo busted', Realmtokens[0]), [Realmtokens]);
+
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         const init = async () => {
@@ -76,10 +90,10 @@ export const HomeScreen = () => {
     const createWallet = useCallback(async () => {
         try {
             const _wallet = ethers.Wallet.fromMnemonic(
-                'rely spot column badge lunch forest question about ketchup produce misery angry',
+                'woman slush laugh wink lonely dose deny piece actress banana giraffe confirm',
             );
-            setMyWallet(_wallet);
             const connectedWallet = _wallet.connect(ethersProvider);
+            setMyWallet(connectedWallet);
             const _ = new WalletGlobal(connectedWallet);
             const balance = await ethersProvider.getBalance(
                 connectedWallet.address,
@@ -175,13 +189,11 @@ export const HomeScreen = () => {
 
     useEffect(() => {
         const TokenEvents = new NativeEventEmitter(Tokens);
-        // subscribe to event
         TokenEvents.addListener('onTokensBalances', res => {
             console.log('onTokensBalances event', res);
         });
 
         return () => {
-            // remove event listener
             TokenEvents.removeAllListeners('onTokensBalances');
         };
     }, []);
@@ -196,6 +208,28 @@ export const HomeScreen = () => {
         const _address = '0x4b58C57db696D2E043a72149507d5267f7dD74fe';
         Tokens.get(_tokens, _address);
     }, []);
+
+    const fetchTokens = () => {
+        JSONTokens.forEach(async (token: Token) => {
+            const _token = new ethers.Contract(token.address, ERC20, MyWallet!);
+            const balance = await _token.balanceOf(
+                '0x4b58C57db696D2E043a72149507d5267f7dD74fe',
+            );
+
+            if (BigNumber.from(balance).gt(0)) {
+                realm.write(() => {
+                    realm.create(
+                        RToken.schema.name,
+                        {
+                            ...token,
+                            balance: balance.toString(),
+                        },
+                        'modified',
+                    );
+                });
+            }
+        });
+    };
 
     return (
         <CustomView container flex justify="flex-start">
@@ -221,7 +255,7 @@ export const HomeScreen = () => {
                 </TouchableOpacity>
             )}
 
-            <TouchableOpacity onPress={getBalances} style={s.button}>
+            <TouchableOpacity onPress={fetchTokens} style={s.button}>
                 <CustomText font="body" color="white">
                     Get balances
                 </CustomText>
@@ -235,7 +269,11 @@ export const HomeScreen = () => {
                     <CustomText font="body">{address}</CustomText>
                 </CustomView>
 
-                <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
+                <TouchableOpacity onPress={e => setCount(c => c + 1)}>
+                    <CustomText font="body">Increment</CustomText>
+                </TouchableOpacity>
+
+                {/* <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
                     <CustomText font="body" bold>
                         My Seed phrase
                     </CustomText>
@@ -268,10 +306,12 @@ export const HomeScreen = () => {
                         Number of Zombies
                     </CustomText>
                     <CustomText font="body">{_balanceOf}</CustomText>
-                </CustomView>
+                </CustomView> */}
+
+                <ActivityIndicator size="large" />
             </CustomView>
 
-            {isLoading && (
+            {/* {isLoading && (
                 <Loader>
                     <CustomView align="center" mg={[140, 20, 0, 20]}>
                         <CustomText font="title" mg={[0, 0, 20, 0]}>
@@ -286,7 +326,7 @@ export const HomeScreen = () => {
                         </CustomText>
                     </CustomView>
                 </Loader>
-            )}
+            )} */}
         </CustomView>
     );
 };

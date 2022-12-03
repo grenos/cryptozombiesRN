@@ -14,7 +14,10 @@ import { useColorScheme, useTheme } from '~Utils';
 const { RealmProvider } = realmContext;
 import { ethers } from 'ethers';
 
-export const ethersProvider = new ethers.providers.InfuraProvider('goerli');
+export const ethersProvider = new ethers.providers.JsonRpcProvider(
+    'https://polygon-mainnet.g.alchemy.com/v2/c2UXl9xyDGsmFW8yLal1KpwNsU5kgrrz',
+);
+
 export class WalletGlobal {
     constructor(_wallet) {
         if (WalletGlobal._instance) {

@@ -246,7 +246,7 @@
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			packageReferences = (
-				7D5AA600293B54C000A2299B /* XCRemoteSwiftPackageReference "web3swift" */,
+				7D5AA600293B54C000A2299B /* XCRemoteSwiftPackageReference "web3swift.git" */,
 			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
@@ -734,7 +734,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7D5AA600293B54C000A2299B /* XCRemoteSwiftPackageReference "web3swift" */ = {
+		7D5AA600293B54C000A2299B /* XCRemoteSwiftPackageReference "web3swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/skywinder/web3swift.git";
 			requirement = {
@@ -747,7 +747,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		7D5AA601293B54C000A2299B /* web3swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7D5AA600293B54C000A2299B /* XCRemoteSwiftPackageReference "web3swift" */;
+			package = 7D5AA600293B54C000A2299B /* XCRemoteSwiftPackageReference "web3swift.git" */;
 			productName = web3swift;
 		};
 /* End XCSwiftPackageProductDependency section */
