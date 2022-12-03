@@ -5,7 +5,7 @@
     "scripts": {
         "setup": "rm -rf node_modules && rm -rf yarn.lock && yarn install && cd ios && pod deintegrate && cd .. && npx pod-install",
         "android": "react-native run-android",
-        "ios": "react-native run-ios",
+        "ios": "react-native run-ios --simulator='iPhone 14 Pro'",
         "start": "react-native start",
         "test": "jest",
         "detox-build-ios": "detox build --configuration ios",

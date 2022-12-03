@@ -13,6 +13,9 @@ import { ethers, Wallet } from 'ethers';
 import { ChainLinkToken, ZombieContract } from '~Web3';
 import { useIsFocused } from '@react-navigation/native';
 
+import { NativeModules, NativeEventEmitter } from 'react-native';
+const { Tokens } = NativeModules;
+
 export const HomeScreen = () => {
     const focus = useIsFocused();
     const [funds, setFunds] = useState('');
@@ -170,6 +173,30 @@ export const HomeScreen = () => {
         }
     };
 
+    useEffect(() => {
+        const TokenEvents = new NativeEventEmitter(Tokens);
+        // subscribe to event
+        TokenEvents.addListener('onTokensBalances', res => {
+            console.log('onTokensBalances event', res);
+        });
+
+        return () => {
+            // remove event listener
+            TokenEvents.removeAllListeners('onTokensBalances');
+        };
+    }, []);
+
+    const getBalances = useCallback(async () => {
+        const _tokens = [
+            '0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39',
+            '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',
+            '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+            '0xb33EaAd8d922B1083446DC23f610c2567fB5180f',
+        ];
+        const _address = '0x4b58C57db696D2E043a72149507d5267f7dD74fe';
+        Tokens.get(_tokens, _address);
+    }, []);
+
     return (
         <CustomView container flex justify="flex-start">
             <CustomStatusBar />
@@ -193,6 +220,12 @@ export const HomeScreen = () => {
                     </CustomText>
                 </TouchableOpacity>
             )}
+
+            <TouchableOpacity onPress={getBalances} style={s.button}>
+                <CustomText font="body" color="white">
+                    Get balances
+                </CustomText>
+            </TouchableOpacity>
 
             <CustomView align="flex-start" mg={[40, 20, 0, 20]}>
                 <CustomView align="flex-start" mg={[0, 0, 20, 0]}>
